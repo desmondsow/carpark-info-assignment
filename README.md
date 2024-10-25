@@ -51,3 +51,72 @@ This assignment should take about 2 to 4 hours of your time depending on your le
 
 ## Need Help
 Create a github issue. We'll get back to you.
+
+## Running the Application
+
+### Prerequisites
+- Node.js (v20.18.0)
+- npm
+
+### Installation
+1. Clone the repository:   
+   ```bash
+   git clone <repository-url>
+   cd carpark-info
+   ```
+
+2. Install dependencies:   
+   ```bash
+   npm ci   
+   ```
+
+3. Create environment file:   
+   ```bash
+   cp .env.example .env   
+   ```
+
+4. Configure your environment variables in `.env` file:   
+   ```env
+   PORT=3000
+   JWT_SECRET=your-secret-key
+   DB_DIALECT=sqlite
+   DB_STORAGE=./db/db.sqlite
+   DB_LOGGING=false   
+   ```
+
+### Running the Application
+1. Start the server:
+   ```bash
+   npm start   
+   ```
+   For development with auto-reload:
+   ```bash
+   npm run dev   
+   ```
+
+2. The server will start on http://localhost:3000
+
+### API Documentation
+- Swagger documentation is available at http://localhost:3000/api-docs
+- You can test the APIs directly from the Swagger UI
+
+### Authentication
+1. Register a new user:   
+   ```bash
+   curl -X POST http://localhost:3000/api/auth/register \
+   -H "Content-Type: application/json" \
+   -d '{"username":"testuser","password":"password123"}'   
+   ```
+
+2. Login to get JWT token:
+   ```bash
+   curl -X POST http://localhost:3000/api/auth/login \
+   -H "Content-Type: application/json" \
+   -d '{"username":"testuser","password":"password123"}'   
+   ```
+
+3. Use the JWT token in subsequent requests:   
+   ```bash
+   curl -X GET http://localhost:3000/api/carparks \
+   -H "Authorization: Bearer <your-jwt-token>"   
+   ```
